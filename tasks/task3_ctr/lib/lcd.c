@@ -155,10 +155,10 @@ void sendStClockEdge(){
 void enableLCD(int delay) {
 int i;
   PORTD = PORTD | _BV(LCD_EN);
- USART_Transmit_String("Check LCD Enable - High");
+ //USART_Transmit_String("Check LCD Enable - High");
   //wait(1000);/* is it required??*/
   PORTD = PORTD & (~ _BV(LCD_EN));
- USART_Transmit_String("Check LCD Enable - LOW");
+ //USART_Transmit_String("Check LCD Enable - LOW");
   wait(1); /*is it required, may be to give time for data to 
     latch at rising edge??*/
 }

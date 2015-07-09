@@ -1,6 +1,0 @@
-Makefile
-demo.c
-demo.lst
-include/
-iocompat.h
-lib/
