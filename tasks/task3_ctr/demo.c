@@ -60,24 +60,34 @@ main (void)
 USART_Transmit_String("How are you???");
 itoa(0x23,testIntStr,16);
 USART_Transmit_String2(testIntStr);
-USART_Transmit_String2("Very well, thank you???");
-USART_Transmit_String2("Very well, thank you7???");
+USART_Transmit_String2("Start 1");
+USART_Transmit_String2("Start 2");
 LCD_gotoXY(0,0);
-LCD_Write("hello world");
+LCD_Write("Restarting...");
+LCD_gotoXY(0,0);
+LCD_Clear();
+wait(245*1);
+LCD_Write("  Welcome to");
+LCD_gotoXY(1,0);
+LCD_Write("   Amity-46");
+wait(245*5);
+LCD_Clear();
+LCD_gotoXY(0,0);
+LCD_Write("Wind(Speed,Dir)");
 //USART_Receive_String();
-USART_Transmit_String2("This is what is typed in ..");
+//USART_Transmit_String2("This is what is typed in ..");
 //USART_Transmit_String2(USART_Receive_String());
 #if STATS_ENABLED
 USART_PrintStats();
 #endif
-USART_Transmit_String2("Very well, thank you8???");
+//USART_Transmit_String2("Very well, thank you8???");
 initRotations();
 initDirectionSensors();
 /* this probably is taken care of by gcc main program exit */
  while(1) {
-    wait(245);
+    wait(245/2);
      LCD_gotoXY(1,0);
-     sprintf(testIntStr,"%03d /s, ", readRotations());
+     sprintf(testIntStr,"%03dr/s, ", readRotations());
      resetRotations();
      LCD_Write(testIntStr);
      USART_Transmit_String(testIntStr);
