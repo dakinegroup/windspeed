@@ -92,7 +92,7 @@ void resetRotations(){
 
 }
 
-char* directions[9] = {"North ", "N-East", "East  ", "S-East", "South ", "S-West", "West  ", "N-West", "Invali"};
+char* directions[9] = {"North  ", "N-East ", "East   ", "S-East ", "South  ", "S-West ", "West   ", "N-West ", "Invalid"};
 /*char* readDirectionByte() {
   unsigned char direction = 0x00;
   char ab[16];

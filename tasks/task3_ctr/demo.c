@@ -53,7 +53,9 @@ main (void)
 {
   int i;
   char testIntStr[20];
-
+  int rotations[5];
+  char ptr_h=0, /* where next write of rotations will happen */
+      ptr_l=0; /* where last read of rotations will happen, nothing if both are equal */
   ioinit ();
 //USART_Transmit_String2("This is a test..");
 
@@ -85,10 +87,30 @@ initRotations();
 initDirectionSensors();
 /* this probably is taken care of by gcc main program exit */
  while(1) {
+    int l = 0, total = 0;
     wait(245/2);
+      {
+        if((ptr_h + 1)%5 == ptr_l) { // buffer full
+
+        } else {
+        ptr_h = (ptr_h + 1)%5;
+        rotations[ptr_h] = readRotations();
+        //resetRotations();
+          continue;          
+        }
+     }
+     /*for(l = 0; l < 10; l++) {
+      total = rotations[(ptr_l + l)%10];
+     }*/
+     total = rotations[ptr_h%5] - rotations[ptr_l%5];
+     //total = total * (2*4)/(2.5*4);
+     total = total * (2*4);
+     ptr_l = (ptr_l +1 )% 5;
+
      LCD_gotoXY(1,0);
-     sprintf(testIntStr,"%03dr/s, ", readRotations());
-     resetRotations();
+     //sprintf(testIntStr,"%03dr/s, ", readRotations());
+     sprintf(testIntStr,"%02d.%dr/s, ", total/10, total%10);
+     //resetRotations();
      LCD_Write(testIntStr);
      USART_Transmit_String(testIntStr);
      LCD_Write(readDirection());
